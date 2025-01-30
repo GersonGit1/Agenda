@@ -1,0 +1,28 @@
+﻿@model Agenda.Models.Usuario
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="formulario">
+    <h1 class="bienvenida">Bienvenido a tu agenda personal</h1>
+    <form asp-action="Login" method="post" asp-controller="Usuario">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    
+        <div class="form-floating">
+            <input asp-for="Nombre" class="form-control"/>
+            <label for="floatingInput">Nombre</label> <!--este label está funcionando como un placeholder-->
+            <span asp-validation-for="Nombre" class="text-danger"></span> <!--aquí se mostrarán los errores que devuelva el modelo Usuario para este campo-->
+        </div>
+        <div class="form-floating">
+            <input asp-for="Contraseña" type="password" class="form-control" />
+            <label for="floatingInput" class="control-label">pass</label>
+            <span asp-validation-for="Contraseña" class="text-danger"></span>
+        </div>
+        <a asp-controller="Usuario" asp-action="Create">¿No tienes una cuenta? crea una</a>
+        <div class="form-group mt-3">
+            <input type="submit" value="Iniciar Sesión" class="btn btn-primary" />
+        </div>
+        <span class="text-danger">@(ViewBag.Error != null ? ViewBag.Error: "")</span>
+    </form>
+</div>

@@ -1,0 +1,16 @@
+﻿@model Agenda.Models.Tarea
+@{
+    ViewData["Title"] = "Ver todas las tareas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Head{
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+}
+
+<div id="calendar"></div>
+
+@section Scripts{
+    <script src="/js/Tareas.js"></script>
+    
+}

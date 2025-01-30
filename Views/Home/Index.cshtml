@@ -1,0 +1,9 @@
+﻿@using System.Security.Claims;
+@{
+    ViewData["Title"] = "Home Page";
+    var nombre = User.FindFirst(ClaimTypes.Name)?.Value;
+}
+
+<div class="text-center">
+    <h1 class="display-4">@("Welcome, " + nombre)</h1>
+</div>

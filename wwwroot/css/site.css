@@ -1,0 +1,48 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+    /*css personalizado*/
+.formulario{
+    max-width:650px;
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+    .formulario {
+        max-height: 200%;
+        margin: auto;
+    }
+}
+
+.bienvenida{
+    font-size:40px;
+    text-align:center;
+    padding:15px;
+    margin: 10px 0;
+}
+@media(max-width: 768px){
+    .bienvenida{
+        font-size:30px;
+    }
+}
+
+@media(max-width: 478px) {
+    .bienvenida {
+        font-size: 25px;
+    }
+}
