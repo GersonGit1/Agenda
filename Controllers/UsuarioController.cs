@@ -43,7 +43,6 @@ namespace Agenda.Controllers
 					return View("Crear");
 				}
 
-
 				Usuario usuario = new();
 				MantenimientoUsuario mantenimiento = new();
 				usuario.Nombre = collection["nombre"];
