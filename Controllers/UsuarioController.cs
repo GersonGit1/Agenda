@@ -1,6 +1,8 @@
-﻿using Agenda.Models;
+﻿using Agenda.Filters;
+using Agenda.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +11,7 @@ using System.Security.Claims;
 
 namespace Agenda.Controllers
 {
+	//[ServiceFilter(typeof(SessionValidationFilter))] //ejecutar este filtro cada vez que se active este controlador
 	public class UsuarioController : Controller
 	{
 		// GET: UsuarioController
@@ -24,7 +27,8 @@ namespace Agenda.Controllers
 		}
 
 		// GET: UsuarioController/Create
-		public ActionResult Create()
+		[AllowAnonymous] //permite ejecutar esta acción aún si no está autenticado (ignora el filtro)
+        public ActionResult Create()
 		{
 			return View("Crear");
 		}
@@ -32,6 +36,7 @@ namespace Agenda.Controllers
 		// POST: UsuarioController/Create
 		[HttpPost]
 		[ValidateAntiForgeryToken]
+		[AllowAnonymous] //permite ejecutar esta acción aún si no está autenticado (ignora el filtro)
 		public ActionResult Create(IFormCollection collection)
 		{
 			try
@@ -101,6 +106,7 @@ namespace Agenda.Controllers
 		//login de los usuarios
 		[HttpPost]
 		[ValidateAntiForgeryToken]
+		[AllowAnonymous]
 		public async Task<IActionResult> Login(Usuario user)
 		{   
             try
@@ -146,10 +152,14 @@ namespace Agenda.Controllers
 
                                 return RedirectToAction("Index", "Tarea");
                             }
+							else
+							{
+                                ViewBag.Error = "Contraseña incorrecta";
+                            }
 						}
                         else
                         {
-                            ViewBag.Error = "Credenciales incorrectas o cuenta no registrada";
+                            ViewBag.Error = "Cuenta no registrada";
                         }
                     }
 					//retornamos una vista, como no especificamos el nombre, buscará en Views/Usuario/Login
@@ -163,6 +173,7 @@ namespace Agenda.Controllers
             }
 		}
 		[HttpGet]
+		[AllowAnonymous]
         public IActionResult Login()
         {
             //para gestion del usuario actualmente autenticado
@@ -172,7 +183,7 @@ namespace Agenda.Controllers
             {
                 if (usuarioActual.Identity.IsAuthenticated)
                 {   //si está autenticado lo dirigimos a la página principal
-                    return RedirectToAction("Index", "Usuario");
+                    return RedirectToAction("Index", "Tarea");
                 }
             }
             //si no ha iniciado sesión correctamente los enviamos d nuevo a login

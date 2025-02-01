@@ -1,3 +1,4 @@
+using Agenda.Filters;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Agenda
@@ -8,6 +9,8 @@ namespace Agenda
 		{
 			var builder = WebApplication.CreateBuilder(args);
 
+			//registrar el filtro en el contrenedor de dependencias
+			builder.Services.AddScoped<SessionValidationFilter>();
 			// Add services to the container.
 			builder.Services.AddControllersWithViews();
 			//agregar el servicio de las sesiones e toda la aplicación

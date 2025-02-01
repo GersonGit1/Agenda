@@ -1,4 +1,5 @@
-﻿using Agenda.Models;
+﻿using Agenda.Filters;
+using Agenda.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.ObjectModel;
@@ -6,6 +7,8 @@ using System.Security.Claims;
 
 namespace Agenda.Controllers
 {
+    [ServiceFilter(typeof(SessionValidationFilter))] //protegemos el controlador de manera que no permita solicitudes sin que el
+    //usuario esté autenticado. esa lógica la definimos en SessionValidationFilter
     public class TareaController : Controller
     {
         // GET: TareaController
@@ -29,6 +32,7 @@ namespace Agenda.Controllers
         }
 
         // GET: TareaController/Create
+        //[ServiceFilter(typeof(SessionValidationFilter))]
         public ActionResult Create()
         {
             return View("Crear");
@@ -37,6 +41,7 @@ namespace Agenda.Controllers
         // POST: TareaController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        
         public ActionResult Create(IFormCollection collection)
         {
             try

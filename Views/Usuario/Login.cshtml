@@ -26,3 +26,31 @@
         <span class="text-danger">@(ViewBag.Error != null ? ViewBag.Error: "")</span>
     </form>
 </div>
+
+
+@section Scripts{
+	<script>
+		// Función para obtener el valor de una cookie por nombre
+		function getCookie(name) {
+			let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+			return match ? decodeURIComponent(match[2]) : null;
+		}
+
+		// Leer la cookie "Mensaje"
+		let mensaje = getCookie("Mensaje");
+
+		// Si la cookie tiene un mensaje, mostramos el SweetAlert
+		if (mensaje) {
+			Swal.fire({
+				icon: 'warning',
+				title: 'Sesión expirada',
+				text: mensaje,
+				confirmButtonText: 'Aceptar'
+			});
+
+			// Borrar la cookie para que no se muestre el mensaje de nuevo
+			document.cookie = "Mensaje=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+		}
+	</script>
+}
+
