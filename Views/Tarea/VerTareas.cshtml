@@ -1,7 +1,9 @@
-﻿@model Agenda.Models.Tarea
+﻿@using System.Security.Claims;
+@model Agenda.Models.Tarea
 @{
     ViewData["Title"] = "Ver todas las tareas";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    string? name = User.FindFirst(ClaimTypes.Name)?.Value;
 }
 
 @section Head{
@@ -12,5 +14,15 @@
 
 @section Scripts{
     <script src="/js/Tareas.js"></script>
-    
+    @if (TempData["Bienvenida"] != null)
+    {
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Bienvenido/a @name',
+                text: '@Html.Raw(TempData["Bienvenida"].ToString())', //para que se muestre correctamente las tildes
+                confirmButtonText: 'Gracias!'
+            });
+        </script>
+    }
 }

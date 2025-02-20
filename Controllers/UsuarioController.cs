@@ -149,7 +149,7 @@ namespace Agenda.Controllers
 
 
                                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), propiedadesDeAutenticacion);
-
+								TempData["Bienvenida"] = "Has iniciado sesión correctamente";
                                 return RedirectToAction("Index", "Tarea");
                             }
 							else
