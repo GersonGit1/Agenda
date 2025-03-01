@@ -1,5 +1,7 @@
 using Agenda.Filters;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
 
 namespace Agenda
 {
@@ -8,6 +10,14 @@ namespace Agenda
 		public static void Main(string[] args)
 		{
 			var builder = WebApplication.CreateBuilder(args);
+
+			//inicializar firebase
+			var pathToKeyFile = Path.Combine(Directory.GetCurrentDirectory(),"agenda-a7905-bb648169ffb7.json");
+
+			FirebaseApp.Create(new AppOptions()
+			{
+				Credential = GoogleCredential.FromFile(pathToKeyFile)
+			});
 
 			//registrar el filtro en el contrenedor de dependencias
 			builder.Services.AddScoped<SessionValidationFilter>();

@@ -16,6 +16,8 @@ namespace Agenda.Models
         [Required(ErrorMessage = "Establece una fecha y hora para esta tarea")]
         public DateTime fecha { get; set; }
         public DateTime? Fin { get; set; }
+
+        public TimeOnly Notificar { get; set; }
         public int IdUsuario { get; set; }
 
     }

@@ -20,6 +20,7 @@ namespace Agenda.Models
                     cmd.Parameters.Add("@fecha", System.Data.SqlDbType.DateTime);
                     cmd.Parameters.Add("@fin", System.Data.SqlDbType.DateTime);
                     cmd.Parameters.Add("@IdUsuario", System.Data.SqlDbType.Int);
+                    //cmd.Parameters.Add("@notificacion",System.Data.SqlDbType.Time);
 
                     cmd.Parameters["@titulo"].Value = tarea.Titulo;
                     cmd.Parameters["@descripcion"].Value = tarea.Descripcion;

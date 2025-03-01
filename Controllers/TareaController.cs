@@ -55,7 +55,8 @@ namespace Agenda.Controllers
                 tarea.Descripcion = collection["descripcion"];
                 tarea.fecha = DateTime.Parse(collection["fecha"]);
                 tarea.Fin = DateTime.Parse(collection["Fin"]);
-                tarea.IdUsuario = Id; 
+                tarea.IdUsuario = Id;
+                //tarea.Notificar = DateTime.Parse(collection["Notificacion"]);
 
                 Mtarea.AñadirTarea(tarea);
                 return RedirectToAction("Index");
